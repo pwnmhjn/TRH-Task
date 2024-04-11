@@ -5,9 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import ExploreIcon from '@mui/icons-material/Explore';
-
 
 
 
@@ -15,12 +14,13 @@ export default function RecipeReviewCard({ listing }) {
    
     return (
 
-        <>
-        <a style={{textDecoration:"none"}}  href={`/show/${listing._id}`}>
-            <Card sx={{ maxWidth: 345  }}>
+        <div className='Allcards' >
+        
+            <Card sx={{ maxWidth: 345 ,height:450 }}>
+            <a style={{textDecoration:"none"}}  href={`/show/${listing._id}`}>
                 <CardHeader
                     avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
                             <ExploreIcon/>
                         </Avatar>
                     }
@@ -37,15 +37,14 @@ export default function RecipeReviewCard({ listing }) {
                     <Typography variant="body2" component="div" color="text.secondary">
                         <h4>
                         {listing.description}
-                        </h4>
+                        </h4><br />
                         <h4>
                         &#8377;{listing.price.toLocaleString('en-IN')}/Night
                         </h4>
                     </Typography>
                 </CardContent>
-                
+                </a>
             </Card>
-            </a>
-        </>
+        </div>
     );
 }

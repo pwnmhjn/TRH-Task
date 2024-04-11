@@ -1,16 +1,20 @@
-import EditIcon from '@mui/icons-material/Edit';
+
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
+import { useNavigate } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
 
-export default function EditBtn() {
+export default function EditBtn({id}) {
+  const navigate = useNavigate()
   return (
     <Stack direction="row" alignItems="center" spacing={1}>
-      
-      <IconButton aria-label="delete" size="large">
-        <EditIcon fontSize="inherit" />
-      </IconButton>
+    <Button variant="contained" onClick={()=>{
+      navigate(`/listings/${id}`)
+    }} endIcon={<EditIcon />}>
+        Edit
+      </Button>
     </Stack>
   );
 }

@@ -4,6 +4,7 @@ import axios from 'axios'
 // import Header from './components/Header/Header.jsx'
 // import Footer from './components/Footer/Footer.jsx'
 import RecipeReviewCard from '../Reusables/HomeCard'
+import Stack from '@mui/material/Stack';
 
 
 function Home() {
@@ -21,17 +22,18 @@ function Home() {
   return (
    <>
     
+    <Stack spacing={{ xs: 1, sm: 2 ,md :3 }} direction="row" useFlexGap flexWrap="wrap" justifyContent ="space-around"  >
     {
       listings.map((listing,index)=>(
-        <div key={listing._id} >
+        <div key={listing._id}  >
             <RecipeReviewCard listing ={listing }/>
         </div>
       ))
     }
+</Stack>
 
    </>
   )
-
 
 }
 

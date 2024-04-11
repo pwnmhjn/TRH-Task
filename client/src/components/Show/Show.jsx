@@ -7,10 +7,10 @@ import axios from 'axios'
 
 
 function Show() {
-  const [listing, setListing] = useState([])
+  const [listing, setListing] = useState({})
   const pathName = document.location.pathname
+  const URL = `/api/listings${pathName}`
 
-  const URL = `/api/listings/${pathName}`
 
   const getdata = () => {
     useEffect(() => {
@@ -37,12 +37,12 @@ function Show() {
 
 
 
-  return (
-
-    <>
-      <ShowCard listing={list} />
-    </>
+  return  (
+    <div >
+      <ShowCard  listing={list} />
+    </div>
   )
+  
 }
 
 export default Show

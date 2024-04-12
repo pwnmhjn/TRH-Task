@@ -1,27 +1,37 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import Deltebtn from './DeleteBtn';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
+import Button from "@mui/material/Button";
+
+// import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
-import EditIcon from '@mui/icons-material/Edit';
-
-
-
+import EditIcon from "@mui/icons-material/Edit";
+import "./ShowCard.css";
 
 export default function ShowCard({ listing }) {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
+  const Delete = () => {
+    axios
+      .delete(`/api/listings/${listing._id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    Navigate("/");
+  };
+
   return (
-    <div className='ShowCard'>
-      <Card sx={{ maxWidth: 500 }}>
-        <CardActionArea>
+    <div className="ShowCard">
+      <Card sx={{ maxWidth: 600, height: 550 }}>
+        <CardActionArea content="div">
           <CardMedia
             component="img"
-            height="250"
+            height="300"
             image={listing.image}
             alt="green iguana"
           />
@@ -30,19 +40,27 @@ export default function ShowCard({ listing }) {
               {listing.title}
             </Typography>
             <Typography variant="body2" component="div" color="text.primary">
-              <h4>{listing.description}</h4>
-              <h4> &#8377; {listing.price}/Night</h4>
-              <h5>{listing.location}</h5>
-              <h5>{listing.country}</h5>
+              <Typography>{listing.description}</Typography>
+              <Typography> &#8377; {listing.price}/Night</Typography>
+              <Typography>{listing.location}</Typography>
+              <Typography>{listing.country}</Typography>
             </Typography>
           </CardContent>
         </CardActionArea>
-        <Stack direction="row" spacing={2}>
-          <Deltebtn id={listing._id} />
-          <Button variant="outlined" endIcon={<EditIcon />} onClick={() => {
-            Navigate(`/edit/${listing._id}`)
-          }} >Edit</Button>
-        </Stack>
+        <div direction="row" spacing={2} className="Btns">
+          <Button variant="outlined" endIcon={<DeleteIcon />} onClick={Delete}>
+            Delete
+          </Button>
+          <Button
+            variant="outlined"
+            endIcon={<EditIcon />}
+            onClick={() => {
+              Navigate(`/show/${listing._id}/edit`);
+            }}
+          >
+            Edit
+          </Button>
+        </div>
       </Card>
     </div>
   );

@@ -1,0 +1,10 @@
+.ShowCard {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+#btns {
+    display: flex;
+    justify-content: center;
+}

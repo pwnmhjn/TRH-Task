@@ -1,26 +1,25 @@
+import React from "react";
+import { useEffect, useState } from "react";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import "./EditForm.css";
+import Typography from "@mui/material/Typography";
 
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { useEffect, useState,useRef } from 'react';
-import Button from '@mui/material/Button';
-import axios from 'axios'
-import { useParams  } from 'react-router-dom'
-
-export default function EditForm({id}) {
+function EditForm() {
   const [listing, setListing] = useState({
-    title: '',
-    price: '',
-    image: '',
-    description: '',
-    country: '',
-    location: '',
-  })
-
-  // const pathName = document.location.pathname;
- 
-  console.log(id)
+    title: "",
+    price: "",
+    image: "",
+    description: "",
+    country: "",
+    location: "",
+  });
+  const navigate = useNavigate();
+  const { id } = useParams();
   useEffect(() => {
-    axios.get(`/api/listings/edit/:${id}`).then(res => {
+    axios.get(`/api/listings/edit/${id}`).then((res) => {
       setListing({
         ...listing,
         title: res.data.title,
@@ -28,35 +27,101 @@ export default function EditForm({id}) {
         image: res.data.image,
         description: res.data.description,
         country: res.data.country,
-        location: res.data.location
+        location: res.data.location,
+      });
+    });
+  }, [id]);
+
+  const changeListing = (event) => {
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+    setListing((prev) => {
+      prev[fieldName] = fieldValue;
+      return { ...prev };
+    });
+  };
+
+  const putData = async (event) => {
+    event.preventDefault();
+    await axios
+      .put(`/api/listings/${id}`, listing)
+      .then((res) => {
+        console.log(res.data);
       })
-    })
-  }, [id])
+      .catch((err) => console.log(err));
+    navigate("/");
+  };
 
-  ;
-const changeListing=(event)=>{
-  const fieldName = event.target.name
-  const fieldValue = event.target.value;
-setListing((prev)=>{
-  prev[fieldName ]= fieldValue;
-  return {...prev}
-})
-}
-
-const putData =async (event)=>{
- event.preventDefault();
- await  axios.put(`/api/listings/${id}`,listing).then(res=>{
-  }).catch(err => console.log(err))
-}
   return (
-    <form onSubmit={putData}>
-      <TextField fullWidth label="Title" name='title' value={listing.title} id="fullWidth" onChange={changeListing}  />
-      <TextField fullWidth label="Description" name='description' value={listing.description} onChange={changeListing} id="fullWidth" />
-      <TextField fullWidth label="Price" name='price' value={listing.price} id="fullWidth" onChange={changeListing} />
-      <TextField fullWidth label="Image" name='image' value={listing.image} id="fullWidth" onChange={changeListing} />
-      <TextField fullWidth label="Location" name='location' value={listing.location} id="fullWidth" onChange={changeListing} />
-      <TextField fullWidth label="Country" name='country' value={listing.country} id="fullWidth" onChange={changeListing} />
-      <button>Submit</button>
-    </form>
+    <div className="EditBox">
+      <Typography variant="h4" component="h1">
+        Edit Your Listing
+      </Typography>
+      <TextField
+        label="Title"
+        name="title"
+        value={listing.title}
+        id="fullWidth"
+        onChange={changeListing}
+        className="EditInput"
+      />
+      <br />
+      <br />
+      <TextField
+        label="Description"
+        name="description"
+        value={listing.description}
+        onChange={changeListing}
+        id="fullWidth"
+        className="EditInput"
+      />
+      <br />
+      <br />
+      <TextField
+        label="Price"
+        name="price"
+        value={listing.price}
+        id="fullWidth"
+        onChange={changeListing}
+        className="EditInput"
+      />
+      <br />
+      <br />
+      <TextField
+        label="Image"
+        name="image"
+        value={listing.image}
+        id="fullWidth"
+        onChange={changeListing}
+        className="EditInput"
+      />
+      <br />
+      <br />
+      <TextField
+        label="Location"
+        name="location"
+        value={listing.location}
+        id="fullWidth"
+        onChange={changeListing}
+        className="EditInput"
+      />
+      <br />
+      <br />
+      <TextField
+        label="Country"
+        name="country"
+        value={listing.country}
+        id="fullWidth"
+        onChange={changeListing}
+        className="EditInput"
+      />
+      <br />
+      <br />
+      <Button variant="contained" onClick={putData} size="large">
+        Submit
+      </Button>
+    </div>
   );
 }
+
+export default EditForm;

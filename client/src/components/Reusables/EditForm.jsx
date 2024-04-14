@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./EditForm.css";
 import Typography from "@mui/material/Typography";
+import { toast } from "react-toastify";
 
 function EditForm() {
   const [listing, setListing] = useState({
@@ -16,7 +17,7 @@ function EditForm() {
     country: "",
     location: "",
   });
-  const navigate = useNavigate();
+ 
   const { id } = useParams();
   useEffect(() => {
     axios.get(`/api/listings/edit/${id}`).then((res) => {
@@ -40,16 +41,17 @@ function EditForm() {
       return { ...prev };
     });
   };
-
-  const putData = async (event) => {
+  const navigate = useNavigate();
+  const putData =  (event) => {
     event.preventDefault();
-    await axios
+     axios
       .put(`/api/listings/${id}`, listing)
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
     navigate("/");
+    toast.success("Listing Edited")
   };
 
   return (

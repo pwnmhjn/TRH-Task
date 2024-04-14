@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import "./ShowCard.css";
+import { toast } from "react-toastify";
 
 export default function ShowCard({ listing }) {
   const Navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function ShowCard({ listing }) {
         console.log(res);
       })
       .catch((err) => console.log(err));
+      toast.success("Listing Deleted")
     Navigate("/");
   };
 

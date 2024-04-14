@@ -27,7 +27,7 @@ export default function ShowCard({ listing }) {
 
   return (
     <div className="ShowCard">
-      <Card sx={{ maxWidth: 600, height: 550 }}>
+      <Card className="ShowCard" sx={{ maxWidth: 600, height: 500 }}>
         <CardActionArea content="div">
           <CardMedia
             component="img"
@@ -47,21 +47,27 @@ export default function ShowCard({ listing }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <div direction="row" spacing={2} className="Btns">
-          <Button variant="outlined" endIcon={<DeleteIcon />} onClick={Delete}>
-            Delete
-          </Button>
-          <Button
-            variant="outlined"
-            endIcon={<EditIcon />}
-            onClick={() => {
-              Navigate(`/show/${listing._id}/edit`);
-            }}
-          >
-            Edit
-          </Button>
-        </div>
       </Card>
+      <div direction="row" className="btns" spacing={2} m={5}>
+        <Button
+          variant="outlined"
+          sx={{ margin: 2 }}
+          endIcon={<DeleteIcon />}
+          onClick={Delete}
+        >
+          Delete
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{ margin: 2 }}
+          endIcon={<EditIcon />}
+          onClick={() => {
+            Navigate(`/show/${listing._id}/edit`);
+          }}
+        >
+          Edit
+        </Button>
+      </div>
     </div>
   );
 }

@@ -1,13 +1,16 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./From.css";
 import Typography from "@mui/material/Typography";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 export default function Form() {
   const navigate = useNavigate();
+
   const [listing, setListing] = useState({
     title: "",
     description: "",
@@ -26,20 +29,23 @@ export default function Form() {
     });
   };
 
-  const submitListing = () => {
+  const submitListing = (event) => {
+    event.preventDefault();
     axios
       .post("/api/listings", listing)
-      .then((result) => {
-        console.log(result.data);
-        navigate("/");
+      .then((res) => {
+        // setListing(res.data);
+        toast.success("Listing Created!");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
+        toast.error(err.response.data);
       });
+    navigate("/");
   };
 
   return (
-    <div className="InputBox">
+    <form onSubmit={submitListing} className="InputBox">
       <Typography variant="h4" component="h1">
         Create New Listing
       </Typography>
@@ -50,6 +56,7 @@ export default function Form() {
         name="title"
         value={listing.title}
         className="Inputs"
+        required
       />
       <br />
       <br />
@@ -59,6 +66,7 @@ export default function Form() {
         name="description"
         value={listing.description}
         className="Inputs"
+        required
       />
       <br />
       <br />
@@ -68,6 +76,7 @@ export default function Form() {
         name="price"
         value={listing.price}
         className="Inputs"
+        required
       />
       <br />
       <br />
@@ -77,6 +86,7 @@ export default function Form() {
         name="image"
         value={listing.image}
         className="Inputs"
+        required
       />
       <br />
       <br />
@@ -86,6 +96,7 @@ export default function Form() {
         name="location"
         value={listing.location}
         className="Inputs"
+        required
       />
       <br />
       <br />
@@ -95,17 +106,13 @@ export default function Form() {
         name="country"
         value={listing.country}
         className="Inputs"
+        required
       />
       <br />
       <br />
-      <Button
-        onClick={submitListing}
-        variant="contained"
-        size="large"
-        color="success"
-      >
+      <Button type="submit" variant="contained" size="large" color="success">
         Submit
       </Button>
-    </div>
+    </form>
   );
 }

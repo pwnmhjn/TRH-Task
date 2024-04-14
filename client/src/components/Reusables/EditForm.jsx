@@ -64,6 +64,7 @@ function EditForm() {
         id="fullWidth"
         onChange={changeListing}
         className="EditInput"
+        required
       />
       <br />
       <br />
@@ -74,6 +75,7 @@ function EditForm() {
         onChange={changeListing}
         id="fullWidth"
         className="EditInput"
+        required
       />
       <br />
       <br />
@@ -84,6 +86,7 @@ function EditForm() {
         id="fullWidth"
         onChange={changeListing}
         className="EditInput"
+        required
       />
       <br />
       <br />
@@ -94,6 +97,7 @@ function EditForm() {
         id="fullWidth"
         onChange={changeListing}
         className="EditInput"
+        required
       />
       <br />
       <br />
@@ -104,6 +108,7 @@ function EditForm() {
         id="fullWidth"
         onChange={changeListing}
         className="EditInput"
+        required
       />
       <br />
       <br />
@@ -114,6 +119,7 @@ function EditForm() {
         id="fullWidth"
         onChange={changeListing}
         className="EditInput"
+        required
       />
       <br />
       <br />

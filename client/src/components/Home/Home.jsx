@@ -10,10 +10,9 @@ function Home() {
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const response = await axios.get("/api/listings");
-      setListings(response.data);
-    })();
+    axios.get("/api/listings").then((res) => {
+      setListings(res.data);
+    });
   }, []);
 
   return (

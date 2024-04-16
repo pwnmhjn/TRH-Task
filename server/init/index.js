@@ -1,6 +1,7 @@
 import { mongoose } from 'mongoose';
 import Listing from '../models/listings.js';
 import sampleListings from './data.js';
+import Review from '../models/reviews.js';
 
 const Mongo_URL = "mongodb://127.0.0.1:27017/wanderland"
 
@@ -18,10 +19,21 @@ await Listing.deleteMany({})
 await Listing.insertMany(sampleListings)
 }
 
-initdata().then(()=>{
-    console.log("data initiated")
-}).catch((err)=>{
-    console.log(err)
-})
+// initdata().then(()=>{
+//     console.log("data initiated")
+// }).catch((err)=>{
+//     console.log(err)
+// })
 
-
+const initReview = async ()=>{
+   const review =  new Review({
+    content:"something something",
+    rating:4
+    })
+    await review.save().then((res)=>{
+        console.log(res)
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+//  initReview()

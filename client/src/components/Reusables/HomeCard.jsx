@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,7 +9,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 
 export default function RecipeReviewCard({ listing }) {
   return (
-    <Card sx={{ maxWidth: 345, height: 450 }}>
+    <Card sx={{ maxWidth: 345, height: 450, mt: 3 }}>
       <a style={{ textDecoration: "none" }} href={`/show/${listing._id}`}>
         <CardHeader
           avatar={

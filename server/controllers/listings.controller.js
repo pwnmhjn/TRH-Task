@@ -8,7 +8,7 @@ const getAllListings = async (req, res) => {
 
   const getListingById =  async (req, res) => {
     const { id } = req.params;
-    let listing = await Listing.findById(id);
+    let listing = await Listing.findById(id).populate('reviews');
     res.send(listing);
   }
   

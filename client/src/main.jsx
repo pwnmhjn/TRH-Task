@@ -6,6 +6,7 @@ import Home from "./components/Home/Home.jsx";
 import Create from "./components/Create/Create.jsx";
 import Show from "./components/Show/Show.jsx";
 import Edit from "./components/Edit/Edit.jsx";
+import PageNotFound from "./components/Reusables/PageNotFound.jsx";
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -30,12 +31,16 @@ const router = createBrowserRouter([
         path: "show/:id/edit",
         element: <Edit />,
       },
+      {
+        path:"*",
+        element:<PageNotFound/>
+      }
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  // </React.StrictMode>
 );

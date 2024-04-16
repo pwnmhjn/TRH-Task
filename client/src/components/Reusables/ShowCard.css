@@ -2,10 +2,30 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 10px;
 
 }
 
 #btns {
     display: flex;
     justify-content: center;
+}
+
+.Reviews {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ReviewCard {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.ReviewInput {
+    display: flex;
+    flex-direction: column;
+
 }

@@ -12,7 +12,7 @@ import './Header.css'
 export default function ButtonAppBar() {
   const Navigate = useNavigate()
   return (
-    <Box sx={{ flexGrow: 1 ,mb:3 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

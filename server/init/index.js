@@ -19,21 +19,21 @@ await Listing.deleteMany({})
 await Listing.insertMany(sampleListings)
 }
 
-// initdata().then(()=>{
-//     console.log("data initiated")
-// }).catch((err)=>{
-//     console.log(err)
-// })
+initdata().then(()=>{
+    console.log("data initiated")
+}).catch((err)=>{
+    console.log(err)
+})
 
-const initReview = async ()=>{
-   const review =  new Review({
-    content:"something something",
-    rating:4
-    })
-    await review.save().then((res)=>{
-        console.log(res)
-    }).catch((err)=>{
-        console.log(err)
-    })
-}
+// const initReview = async ()=>{
+//    const review =  new Review({
+//     content:"something something",
+//     rating:4
+//     })
+//     await review.save().then((res)=>{
+//         console.log(res)
+//     }).catch((err)=>{
+//         console.log(err)
+//     })
+// }
 //  initReview()

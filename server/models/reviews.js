@@ -8,13 +8,13 @@ const ReviewSchema = new Schema({
         required:true
     },
     rating:{
-        default:2,
+        default:1,
         min:1,
         max:5,
         type:Number,
-        set:(e)=>e===""?2:e,
-    }
-    ,createdAt:{
+        set:(e)=>e===""?1:e,
+    },
+    createdAt:{
         type:Date,
         defaul:Date.now()
     }

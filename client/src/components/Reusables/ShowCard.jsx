@@ -126,13 +126,13 @@ export default function ShowCard({ listing }) {
                 onChange={handleReview}
                 defaultValue={2}
                 required
-                style={{ width: 150 }}
+                
               />
               <Button
                 variant="outlined"
                 type="submit"
                 endIcon={<ArrowUpwardIcon />}
-                style={{ width: 100, marginLeft: 100 }}
+                style={{ width: 100, marginLeft: 120 }}
               >
                 Submit
               </Button>

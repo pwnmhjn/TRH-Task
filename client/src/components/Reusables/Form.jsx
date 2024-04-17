@@ -34,7 +34,7 @@ export default function Form() {
     axios
       .post("/api/listings", listing)
       .then((res) => {
-        setListing(res.data)
+        setListing(res.data);
         toast.success("Listing Created!");
       })
       .catch((err) => {

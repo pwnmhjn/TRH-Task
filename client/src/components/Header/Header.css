@@ -1,5 +1,9 @@
-.HomeNav{
+.HomeNav {
 	text-decoration: none;
-	color:white;
+	color: white;
 	font-size: 25px;
+}
+
+.NewList {
+	margin-left: 10px;
 }

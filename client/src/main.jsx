@@ -6,9 +6,9 @@ import Home from "./components/Home/Home.jsx";
 import Create from "./components/Create/Create.jsx";
 import Show from "./components/Show/Show.jsx";
 import Edit from "./components/Edit/Edit.jsx";
+import SignUp from "./components/SingUp/SignUp.jsx";
+import LogIn from "./components/LogIn/LogIn.jsx";
 import PageNotFound from "./components/Reusables/PageNotFound.jsx";
-
-import { ToastContainer, toast } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -31,16 +31,18 @@ const router = createBrowserRouter([
         path: "show/:id/edit",
         element: <Edit />,
       },
+      { path: "signup", element: <SignUp /> },
+      { path: "login", element: <LogIn /> },
       {
-        path:"*",
-        element:<PageNotFound/>
-      }
+        path: "*",
+        element: <PageNotFound />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
   // </React.StrictMode>
 );

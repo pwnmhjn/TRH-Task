@@ -13,6 +13,15 @@ import axios from "axios";
 export default function ButtonAppBar() {
   const Navigate = useNavigate();
 
+
+  const Logout = ()=>{
+    axios.get("/api/listings/logout").then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

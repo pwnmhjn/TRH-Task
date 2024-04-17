@@ -32,13 +32,6 @@ app.use("/api/listings", listings);
 app.use("/api/listings", reviews);
 app.use("/api/listings", users);
 
-
-
-
-
-
-
-
 // ============================================
 app.use((error, req, res, next) => {
   const { status = 500, message = "something went wrong" } = error;

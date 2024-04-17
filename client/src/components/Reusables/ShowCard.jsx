@@ -38,29 +38,34 @@ export default function ShowCard({ listing }) {
     axios
       .post(`/api/listings/${listing._id}/reviews`, review)
       .then((result) => {
-        console.log(result);
-
+        toast.success("Review created");
         window.location.reload(false);
       })
-      .catch((err) => console.log(err));
-    toast.success("Review created");
+      .catch((err) => {
+        Navigate("/login")
+        toast.success(err.response.data)
+      });
+    
   };
 
-  const Delete = (event) => {
+  const Delete = () => {
     axios
       .delete(`/api/listings/${listing._id}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        toast.success("Listing Deleted");
+        Navigate("/");
       })
-      .catch((err) => console.log(err));
-    toast.success("Listing Deleted");
-    Navigate("/");
+      .catch((err) => {
+        toast.success(err.response.data)
+        Navigate("/login")
+      });
+    
   };
 
   return (
     <div>
       <div className="ShowCard">
-        <Card sx={{ maxWidth: 600, minWidth: 600, height: 500 }}>
+        <Card sx={{ maxWidth: 600, minWidth: 600, height: 550 }}>
           <CardActionArea content="div">
             <CardMedia
               component="img"
@@ -73,6 +78,7 @@ export default function ShowCard({ listing }) {
                 {listing.title}
               </Typography>
               <Typography variant="body2" component="div" color="text.primary">
+                <Typography variant="h6" >@{listing.owner && listing.owner.username}</Typography>
                 <Typography>{listing.description}</Typography>
                 <Typography> &#8377; {listing.price}/Night</Typography>
                 <Typography>{listing.location}</Typography>

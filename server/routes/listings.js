@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import wrapAsync from "../utils/WrapAsync.js";
 import { getAllListings,deleteListing,putEditListing,getListingById,postListing,getListingByIdForEdit  } from "../controllers/listings.controller.js";
-
+import auth from "../middleware/auth.js";
 
 router.get(
     "/",
@@ -15,7 +15,7 @@ router.get(
   );
 
   router.post(
-    "/",
+    "/",auth,
     wrapAsync(postListing)
   );
   router.get(
@@ -23,11 +23,12 @@ router.get(
     wrapAsync(getListingByIdForEdit)
   );
   router.put(
-    "/:id",
+    "/:id", auth,
     wrapAsync(putEditListing)
   );
   router.delete(
     "/:id",
+    auth,
     wrapAsync(deleteListing)
   );
 

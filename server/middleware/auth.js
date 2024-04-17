@@ -3,7 +3,7 @@ import JWT from "jsonwebtoken";
 
 const auth = (req, res, next) => {
     console.log(req.cookies)
-    const { token } = rq.cookies
+    const { token } = req.cookies
     if (!token) {
         res.status(403).send("please login first")
     }

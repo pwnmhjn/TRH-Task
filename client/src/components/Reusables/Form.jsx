@@ -2,7 +2,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import "./From.css";
 import Typography from "@mui/material/Typography";
 import { toast } from "react-toastify";
@@ -35,13 +35,15 @@ export default function Form() {
       .post("/api/listings", listing)
       .then((res) => {
         setListing(res.data);
+        navigate("/")
         toast.success("Listing Created!");
       })
       .catch((err) => {
         console.log(err.response);
+        navigate("/login")
         toast.error(err.response.data);
       });
-    navigate(`/`);
+    // navigate(`/`);
   };
 
   return (

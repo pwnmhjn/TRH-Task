@@ -47,11 +47,15 @@ function EditForm() {
      axios
       .put(`/api/listings/${id}`, listing)
       .then((res) => {
-        console.log(res.data);
+        toast.success("Listing Edited")
+         navigate("/");
       })
-      .catch((err) => console.log(err));
-    navigate("/");
-    toast.success("Listing Edited")
+      .catch((err) => {
+        toast.success(err.response.data)
+        navigate("/login")
+      });
+   
+   
   };
 
   return (

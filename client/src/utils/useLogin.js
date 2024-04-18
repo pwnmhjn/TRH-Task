@@ -1,16 +1,24 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import axios from "axios";
 
+const useLogin = () => {
+  const [isLogin, setIsLogin] = useState(false);
 
-const useLogin = ()=>{
-    const [isLogin ,setIsLogin]= useState(false)
+  useEffect(() => {
+    axios
+      .get("/api/listings/token")
+      .then((res) => {
+        if (res.data.status == true) {
+          setIsLogin(true);
+        } else {
+          setIsLogin(false);
+        }
+        
+      })
+      .catch((err) => console.log(err));
+  },[]);
 
-    useEffect(()=>{
-        axios.get("api/listings/token")
-        .then(res=>setIsLogin(true) ).catch(err=>setIsLogin(false))
-    },[])
+  return isLogin;
+};
 
-    return isLogin;
-}
-
-export default useLogin
+export default useLogin;

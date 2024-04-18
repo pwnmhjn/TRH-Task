@@ -8,34 +8,49 @@ import { CardActions } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import useReviewAuth from "../../utils/useReviewAuth";
+
 
 export default function Review({ review }) {
   const { id } = useParams();
+  const AuthorId = useReviewAuth()
+  // console.log(AuthorId)
+  // console.log(review.author && review.author._id)
 
   const Delete = () => {
     axios
       .delete(`/api/listings/${id}/reviews/${review._id}`)
       .then((result) => {
-        window.location.reload(false);
+        toast.success("review Delete");
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       })
       .catch((err) => console.log(err));
-    toast.success("review Delete");
   };
 
   return (
-    <Card style={{ width: 280, maxHeight: 300, margin: 10, padding: 0 }}>
+    <Card style={{ width: 280, maxHeight:300,  margin: 10, padding: 0 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="red" gutterBottom>
           @{review.author.username}
         </Typography>
-        <Typography>{review.content}</Typography>
+        <Typography style={{height:50}} >{review.content}</Typography>
         <Rating name="read-only" value={review.rating} readOnly />
       </CardContent>
 
       <CardActions>
-        <Button onClick={Delete} variant="outlined" color="error">
-          Delete
-        </Button>
+
+ {
+   AuthorId == (review.author && review.author._id) &&
+   <Button onClick={Delete} variant="outlined" color="error">
+  Delete
+</Button>
+ }
+  
+
+       
+
       </CardActions>
     </Card>
   );

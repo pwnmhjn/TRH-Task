@@ -38,7 +38,7 @@ const logUser = async (req, res) => {
   }
   // await Bcrypt.compare(password,user.password)
   if (user && (await Bcrypt.compare(password, user.password))) {
-    const token = JWT.sign({ id: user._id }, "pwnmhjn", {
+    const token = JWT.sign({ id: user._id,username:user.username }, "pwnmhjn", {
       expiresIn: "2h",
     });
     user.password = undefined;

@@ -57,7 +57,7 @@ const nav = useLogin()
           </Typography>
 {
 
-  useLogin()? <Button color="inherit" onClick={Logout}>
+  nav? <Button color="inherit" onClick={Logout}>
   LogOut
 </Button>:<> <Button
             className="NewList"

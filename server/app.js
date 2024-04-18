@@ -3,8 +3,10 @@ import { mongoose } from "mongoose";
 import listings from "./routes/listings.js";
 import reviews from "./routes/reviews.js";
 import users from "./routes/users.js";
-
-
+import Listing from "./models/listings.js";
+import Review from "./models/reviews.js";
+import User from "./models/users.js";
+import JWT from "jsonwebtoken"
 
 import cookieParser from "cookie-parser";
 
@@ -15,7 +17,7 @@ const Mongo_URL = "mongodb://127.0.0.1:27017/wanderland";
 // ===================================================
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 // ==========================================
 const main = async () => {
   mongoose.connect(Mongo_URL);
@@ -28,20 +30,44 @@ main()
     console.log(err);
   });
 // ============================================
-app.get("/api/listings/token",(req,res)=>{
-  const {token} = req.cookies;
-  if(!token){
-   res.status(400).send("token is not availbale")
+app.get("/api/listings/token", (req, res) => {
+  const { token } = req.cookies;
+  if (!token) {
+    res.json({ status: false });
+  } else {
+    res.json({ status: true });
   }
-  res.status(200).send(token)
-  })
+});
+app.get("/api/listings/owner", async(req, res) => {
+  try {
+     const { token } = req.cookies;
+  const decode = JWT.verify(token,"pwnmhjn")
+  res.send(decode.id)
+  } catch (error) {
+    res.send("Access Denid")
+  }
+ 
+
+});
+
+
+app.get("/api/listings/author", async(req, res) => {
+  try {
+     const { token } = req.cookies;
+  const decode = JWT.verify(token,"pwnmhjn")
+  res.send(decode.id)
+  } catch (error) {
+    res.send("Access Denid")
+  }
+});
+
+
+
+
+
 app.use("/api/listings", listings);
 app.use("/api/listings", reviews);
 app.use("/api/listings", users);
-
-
-
-
 
 // ============================================
 app.use((error, req, res, next) => {

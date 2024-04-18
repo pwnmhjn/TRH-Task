@@ -42,24 +42,23 @@ export default function ShowCard({ listing }) {
         window.location.reload(false);
       })
       .catch((err) => {
-        Navigate("/login")
-        toast.success(err.response.data)
+        Navigate("/login");
+        toast.success(err.response.data);
       });
-    
   };
 
   const Delete = () => {
     axios
       .delete(`/api/listings/${listing._id}`)
-      .then(() => {
-        toast.success("Listing Deleted");
+      .then((res) => {
+        toast.success(res.data);
+        console.log(res);
         Navigate("/");
       })
       .catch((err) => {
-        toast.success(err.response.data)
-        Navigate("/login")
+        toast.success(err.response.data);
+        Navigate("/login");
       });
-    
   };
 
   return (
@@ -78,7 +77,9 @@ export default function ShowCard({ listing }) {
                 {listing.title}
               </Typography>
               <Typography variant="body2" component="div" color="text.primary">
-                <Typography variant="h6" >@{listing.owner && listing.owner.username}</Typography>
+                <Typography variant="h6" style={{ color: "red" }}>
+                  @{listing.owner && listing.owner.username}
+                </Typography>
                 <Typography>{listing.description}</Typography>
                 <Typography> &#8377; {listing.price}/Night</Typography>
                 <Typography>{listing.location}</Typography>
@@ -132,7 +133,6 @@ export default function ShowCard({ listing }) {
                 onChange={handleReview}
                 defaultValue={2}
                 required
-                
               />
               <Button
                 variant="outlined"

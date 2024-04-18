@@ -1,11 +1,20 @@
 import Listing from "../models/listings.js";
 import Review from "../models/reviews.js";
+import JWT from "jsonwebtoken";
 
 const postReviews = async (req, res) => {
+  const { token } = req.cookies;
+  const decode = JWT.verify(token, "pwnmhjn");
+  req.user = decode;
   const { id } = req.params;
-  const reviewData = req.body;
+  const reviewData = {
+    content: req.body.content,
+    rating: req.body.rating,
+    author: req.user.id,
+  };
   const listing = await Listing.findById(id);
   const newReview = new Review(reviewData);
+
   listing.reviews.push(newReview);
   const review = await newReview.save();
   await listing.save();

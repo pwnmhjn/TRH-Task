@@ -17,7 +17,7 @@ function EditForm() {
     country: "",
     location: "",
   });
- 
+
   const { id } = useParams();
   useEffect(() => {
     axios.get(`/api/listings/edit/${id}`).then((res) => {
@@ -42,20 +42,18 @@ function EditForm() {
     });
   };
   const navigate = useNavigate();
-  const putData =  (event) => {
+  const putData = (event) => {
     event.preventDefault();
-     axios
+    axios
       .put(`/api/listings/${id}`, listing)
       .then((res) => {
-        toast.success("Listing Edited")
-         navigate("/");
+        toast.success(res.data);
+        navigate("/");
       })
       .catch((err) => {
-        toast.success(err.response.data)
-        navigate("/login")
+        toast.success(err.response.data);
+        navigate("/login");
       });
-   
-   
   };
 
   return (

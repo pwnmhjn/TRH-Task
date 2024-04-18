@@ -11,8 +11,6 @@ import { toast } from "react-toastify";
 
 export default function Review({ review }) {
   const { id } = useParams();
-  console.log(id);
-  console.log(review._id);
 
   const Delete = () => {
     axios
@@ -27,8 +25,8 @@ export default function Review({ review }) {
   return (
     <Card style={{ width: 280, maxHeight: 300, margin: 10, padding: 0 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Jane Doe
+        <Typography sx={{ fontSize: 14 }} color="red" gutterBottom>
+          @{review.author.username}
         </Typography>
         <Typography>{review.content}</Typography>
         <Rating name="read-only" value={review.rating} readOnly />

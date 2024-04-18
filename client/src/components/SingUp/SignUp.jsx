@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [user, setUser] = useState({
@@ -21,13 +22,14 @@ function SignUp() {
       return { ...prev };
     });
   };
-
+const Navigate = useNavigate()
   const CreateUser = (event) => {
     event.preventDefault();
     axios
       .post("/api/listings/register", user)
       .then((res) => {
-        console.log(res);
+        Navigate("/login")
+        
       })
       .catch((err) => console.log(err));
     setUser({
@@ -39,7 +41,7 @@ function SignUp() {
   };
 
   return (
-    <form className="InputBox" onSubmit={CreateUser} style={{ marginTop: 10 }}>
+    <form className="InputBox"  style={{ marginTop: 10 }}>
       <Typography variant="h4" component="h1">
         Sign Up
       </Typography>
@@ -85,7 +87,7 @@ function SignUp() {
       />
       <br />
       <br />
-      <Button type="submit" variant="contained" size="large" color="success">
+      <Button type="submit" onClick={CreateUser} variant="contained" size="large" color="success">
         SignUp
       </Button>
     </form>

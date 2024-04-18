@@ -28,9 +28,20 @@ main()
     console.log(err);
   });
 // ============================================
+app.get("/api/listings/token",(req,res)=>{
+  const {token} = req.cookies;
+  if(!token){
+   res.status(400).send("token is not availbale")
+  }
+  res.status(200).send(token)
+  })
 app.use("/api/listings", listings);
 app.use("/api/listings", reviews);
 app.use("/api/listings", users);
+
+
+
+
 
 // ============================================
 app.use((error, req, res, next) => {

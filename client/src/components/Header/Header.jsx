@@ -9,19 +9,26 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import axios from "axios";
-
+import useLogin from "../../utils/useLogin";
+import { toast } from "react-toastify";
 export default function ButtonAppBar() {
   const Navigate = useNavigate();
+ 
 
-
-  const Logout = ()=>{
-    axios.get("/api/listings/logout").then((res)=>{
-      console.log(res)
-    }).catch((err)=>{
+  const Logout = () => {
+    axios.get("/api/listings/logout").then((res) => {
+      window.location.reload(false)
+      Navigate("/")
+    }).catch((err) => {
       console.log(err)
     })
   }
+// const NewListing = ()=>{
 
+// useLogin()?Navigate("/create"):Navigate("/login")
+// }
+
+const nav = useLogin()
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -41,14 +48,18 @@ export default function ButtonAppBar() {
             <Button
               sx={{ ml: 4 }}
               color="inherit"
-              onClick={() => {
-                Navigate("/create");
+              onClick={()=>{
+                Navigate(nav?"/create":"/login")
               }}
             >
               New Listing
             </Button>
           </Typography>
-          <Button
+{
+
+  useLogin()? <Button color="inherit" onClick={Logout}>
+  LogOut
+</Button>:<> <Button
             className="NewList"
             color="inherit"
             onClick={() => {
@@ -65,9 +76,10 @@ export default function ButtonAppBar() {
           >
             LogIn
           </Button>
-          <Button color="inherit" onClick={Logout}>
-            LogOut
-          </Button>
+          </>
+}
+         
+           
         </Toolbar>
       </AppBar>
     </Box>

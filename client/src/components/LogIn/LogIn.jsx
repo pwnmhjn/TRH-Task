@@ -4,13 +4,14 @@ import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LogIn() {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-
+const Navigate = useNavigate()
   const handleChange = (event) => {
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
@@ -20,23 +21,23 @@ function LogIn() {
     });
   };
 
-  const CreateUser = (event) => {
-    event.preventDefault();
+  const LoginUser = (event) => {
     axios
       .post("/api/listings/login", user)
       .then((res) => {
-        console.log(res.data);
+        Navigate("/")
+        window.location.reload(false)
       })
       .catch((err) => console.log(err));
-
     setUser({
       username: "",
       password: "",
     });
+    
   };
 
   return (
-    <form className="InputBox" onSubmit={CreateUser} style={{ marginTop: 10 }}>
+    <form className="InputBox"  style={{ marginTop: 10 }}>
       <Typography variant="h4" component="h1">
         Log In
       </Typography>
@@ -62,7 +63,7 @@ function LogIn() {
       />
       <br />
       <br />
-      <Button type="submit" variant="contained" size="large" color="success">
+      <Button type="submit" variant="contained" onClick={LoginUser}  size="large" color="success">
         LogIN
       </Button>
     </form>

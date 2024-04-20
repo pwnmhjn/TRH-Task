@@ -14,17 +14,17 @@ function Layout() {
       <Header />
       <Outlet />
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={3000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         newestOnTop={false}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-        transition:Slide
+        theme="colored"
+        transition:Flip
       />
       <Footer />
     </>

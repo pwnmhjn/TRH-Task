@@ -21,7 +21,7 @@ export default function Review({ review }) {
     axios
       .delete(`/api/listings/${id}/reviews/${review._id}`)
       .then((result) => {
-        toast.success("review Delete");
+        toast.error("Review Delete");
         setTimeout(() => {
           window.location.reload(false);
         }, 1500);
@@ -48,9 +48,6 @@ export default function Review({ review }) {
 </Button>
  }
   
-
-       
-
       </CardActions>
     </Card>
   );

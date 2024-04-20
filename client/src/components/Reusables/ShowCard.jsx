@@ -59,7 +59,7 @@ export default function ShowCard({ listing }) {
     axios
       .delete(`/api/listings/${listing._id}`)
       .then((res) => {
-        toast.success(res.data);
+        toast.error(res.data);
         console.log(res);
         Navigate("/");
       })

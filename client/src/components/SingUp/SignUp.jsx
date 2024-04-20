@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUp() {
   const [user, setUser] = useState({
@@ -28,7 +29,12 @@ const Navigate = useNavigate()
     axios
       .post("/api/listings/register", user)
       .then((res) => {
-        Navigate("/login")
+       if(res.data.success){
+         Navigate("/login")
+        toast.success(res.data.message)
+       }else{
+        toast.error(res.data.message)
+       }
         
       })
       .catch((err) => console.log(err));
@@ -41,7 +47,7 @@ const Navigate = useNavigate()
   };
 
   return (
-    <form className="InputBox"  style={{ marginTop: 10 }}>
+    <form className="InputBox" onSubmit={CreateUser}  style={{ marginTop: 10 }}>
       <Typography variant="h4" component="h1">
         Sign Up
       </Typography>
@@ -87,8 +93,14 @@ const Navigate = useNavigate()
       />
       <br />
       <br />
-      <Button type="submit" onClick={CreateUser} variant="contained" size="large" color="success">
+      <Button type="submit"  variant="contained" size="large" color="success">
         SignUp
+      </Button>
+      &nbsp;
+      <Button variant="outlined" onClick={()=>{
+        Navigate("/login")
+      }}  size="large" color="success">
+        LogIN
       </Button>
     </form>
   );

@@ -6,6 +6,7 @@ import { redirect, useNavigate } from "react-router-dom";
 import "./From.css";
 import Typography from "@mui/material/Typography";
 import { toast } from "react-toastify";
+import { Box } from "@mui/material";
 
 import "react-toastify/dist/ReactToastify.css";
 export default function Form() {
@@ -40,14 +41,15 @@ export default function Form() {
       })
       .catch((err) => {
         console.log(err.response);
-        navigate("/login")
+        navigate("/create")
         toast.error(err.response.data);
       });
     // navigate(`/`);
   };
 
   return (
-    <form onSubmit={submitListing} className="InputBox">
+    <Box>
+    <form onSubmit={submitListing}  className="InputBox">
       <Typography variant="h4" component="h1">
         Create New Listing
       </Typography>
@@ -116,5 +118,6 @@ export default function Form() {
         Submit
       </Button>
     </form>
+    </Box>
   );
 }

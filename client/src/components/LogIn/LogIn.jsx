@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function LogIn() {
   const [user, setUser] = useState({
@@ -22,13 +23,24 @@ const Navigate = useNavigate()
   };
 
   const LoginUser = (event) => {
+
+
     axios
       .post("/api/listings/login", user)
       .then((res) => {
+       if(res.data.success){
         Navigate("/")
+      toast.success("User LogIn")
         window.location.reload(false)
+
+       }else{
+        toast.error(res.data.message)
+        Navigate("/login")
+       }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+      });
     setUser({
       username: "",
       password: "",
@@ -37,6 +49,9 @@ const Navigate = useNavigate()
   };
 
   return (
+    <>
+    
+    
     <form className="InputBox"  style={{ marginTop: 10 }}>
       <Typography variant="h4" component="h1">
         Log In
@@ -66,7 +81,15 @@ const Navigate = useNavigate()
       <Button type="submit" variant="contained" onClick={LoginUser}  size="large" color="success">
         LogIN
       </Button>
+      &nbsp;
+      <Button  variant="outlined" onClick={()=>{
+      Navigate("/signup")
+    }}  size="large" color="success">
+        SignUP
+      </Button>
     </form>
+   
+    </>
   );
 }
 

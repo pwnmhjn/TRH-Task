@@ -30,15 +30,22 @@ main()
     console.log(err);
   });
 // ============================================
+
+
 app.get("/api/listings/token", (req, res) => {
   const { token } = req.cookies;
-  if (!token) {
+  try {
+      if (!token) {
     res.json({ status: false });
   } else {
     res.json({ status: true });
   }
+  } catch (error) {
+    res.send("Bad request")
+  }
+
 });
-app.get("/api/listings/owner", async(req, res) => {
+app.get("/api/listings/owner",  (req, res) => {
   try {
      const { token } = req.cookies;
   const decode = JWT.verify(token,"pwnmhjn")
@@ -49,7 +56,6 @@ app.get("/api/listings/owner", async(req, res) => {
  
 
 });
-
 
 app.get("/api/listings/author", async(req, res) => {
   try {

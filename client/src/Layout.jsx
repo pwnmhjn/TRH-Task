@@ -1,14 +1,12 @@
 import React from "react";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import { Outlet } from "react-router-dom";
 import "./Layout.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Layout() {
-
-  
   return (
     <>
       <Header />

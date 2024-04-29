@@ -10,10 +10,9 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useReviewAuth from "../../utils/useReviewAuth";
 
-
 export default function Review({ review }) {
   const { id } = useParams();
-  const AuthorId = useReviewAuth()
+  const AuthorId = useReviewAuth();
   // console.log(AuthorId)
   // console.log(review.author && review.author._id)
 
@@ -30,24 +29,21 @@ export default function Review({ review }) {
   };
 
   return (
-    <Card style={{ width: 280, maxHeight:300,  margin: 10, padding: 0 }}>
+    <Card style={{ width: 280, maxHeight: 300, margin: 10, padding: 0 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="red" gutterBottom>
           @{review.author.username}
         </Typography>
-        <Typography style={{height:50}} >{review.content}</Typography>
+        <Typography style={{ height: 50 }}>{review.content}</Typography>
         <Rating name="read-only" value={review.rating} readOnly />
       </CardContent>
 
       <CardActions>
-
- {
-   AuthorId == (review.author && review.author._id) &&
-   <Button onClick={Delete} variant="outlined" color="error">
-  Delete
-</Button>
- }
-  
+        {AuthorId == (review.author && review.author._id) && (
+          <Button onClick={Delete} variant="outlined" color="error">
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

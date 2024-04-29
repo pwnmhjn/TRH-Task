@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import ShowCard from "../Reusables/ShowCard";
+
+import ShowCard from "../../Components/Listings/Read/ShowCard";
 import { useState } from "react";
 import axios from "axios";
 

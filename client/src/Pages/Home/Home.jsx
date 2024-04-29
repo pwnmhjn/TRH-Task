@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-// import './App.css'
 import axios from "axios";
-// import Header from './components/Header/Header.jsx'
-// import Footer from './components/Footer/Footer.jsx'
-import RecipeReviewCard from "../Reusables/HomeCard";
 import Stack from "@mui/material/Stack";
+import HomeCard from "../../Components/HomeCard";
 
 function Home() {
   const [listings, setListings] = useState([]);
@@ -28,7 +25,7 @@ function Home() {
       >
         {listings.map((listing, index) => (
           <div key={listing._id}>
-            <RecipeReviewCard listing={listing} />
+            <HomeCard listing={listing} />
           </div>
         ))}
       </Stack>

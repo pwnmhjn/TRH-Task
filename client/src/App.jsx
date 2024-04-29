@@ -1,22 +1,50 @@
-
-// import { useEffect, useState } from 'react'
 // import './App.css'
-// import axios from 'axios'
-import Header from './components/Header/Header.jsx'
-import Footer from './components/Footer/Footer.jsx'
-import Home from './components/Home/Home.jsx'
+
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./Layout.jsx";
+import {
+  PageNotFound,
+  Create,
+  Show,
+  Edit,
+  Home,
+  SignUp,
+  LogIn,
+} from "./Pages/index.js";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "create",
+        element: <Create />,
+      },
+      {
+        path: "show/:id",
+        element: <Show />,
+      },
+      {
+        path: "show/:id/edit",
+        element: <Edit />,
+      },
+      { path: "signup", element: <SignUp /> },
+      { path: "login", element: <LogIn /> },
+      {
+        path: "*",
+        element: <PageNotFound />,
+      },
+    ],
+  },
+]);
 
 function App() {
-
-  return (
-    <>
-      {/* <Header />
-      <Home />
-      <Footer /> */}
-    </>
-  )
-
-
+  return <RouterProvider router={router} />;
 }
 
-// export default App
+export default App;

@@ -1,5 +1,5 @@
 import React from "react";
-import EditForm from "../Reusables/EditForm";
+import EditForm from "../../Components/Listings/Edit/EditForm";
 
 function Edit() {
   return (

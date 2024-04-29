@@ -9,21 +9,20 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import Review from "./Reviews";
+import Review from "../../Reviews/Reviews";
 import TextField from "@mui/material/TextField";
 import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import "./ShowCard.css";
 import { toast } from "react-toastify";
-import useLogin from "../../utils/useLogin";
-import useListingAuth from "../../utils/useListingAuth";
-
+import useLogin from "../../../utils/useLogin";
+import useListingAuth from "../../../utils/useListingAuth";
 
 export default function ShowCard({ listing }) {
-  const nav = useLogin()
-  const OwnerId = useListingAuth()
-  
+  const nav = useLogin();
+  const OwnerId = useListingAuth();
+
   const [review, setReview] = useState({
     content: "",
     rating: "",
@@ -69,7 +68,6 @@ export default function ShowCard({ listing }) {
       });
   };
 
-
   return (
     <div>
       <div className="ShowCard">
@@ -86,53 +84,56 @@ export default function ShowCard({ listing }) {
                 {listing.title}
               </Typography>
               <Typography variant="body2" component="div" color="text.primary">
-                <Typography  variant="p" style={{ color: "red",textDecoration:"underline" }}>
+                <Typography
+                  variant="p"
+                  style={{ color: "red", textDecoration: "underline" }}
+                >
                   @{listing.owner && listing.owner.username} <br />
                 </Typography>
-                <Typography sx={{mb:1 ,mt:1}} >{listing.description}</Typography>
-                <Typography sx={{mb:1}}  > &#8377; {listing.price}/Night</Typography>
+                <Typography sx={{ mb: 1, mt: 1 }}>
+                  {listing.description}
+                </Typography>
+                <Typography sx={{ mb: 1 }}>
+                  {" "}
+                  &#8377; {listing.price}/Night
+                </Typography>
                 <Typography>{listing.location}</Typography>
                 <Typography>{listing.country}</Typography>
               </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
-        
-       { OwnerId ==  ( listing.owner && listing.owner._id) &&
-       <div direction="row" className="btns" spacing={2} m={5}>
-       <Button
-         variant="outlined"
-         sx={{ margin: 2 }}
-         endIcon={<DeleteIcon />}
-         onClick={Delete}
-       >
-         Delete
-       </Button>
-       <Button
-         variant="outlined"
-         sx={{ margin: 2 }}
-         endIcon={<EditIcon />}
-         onClick={() => {
-           Navigate(`/show/${listing._id}/edit`);
-         }}
-       >
-         Edit
-       </Button>
-   </div>
-       } 
-        
 
-
-
+        {OwnerId == (listing.owner && listing.owner._id) && (
+          <div direction="row" className="btns" spacing={2} m={5}>
+            <Button
+              variant="outlined"
+              sx={{ margin: 2 }}
+              endIcon={<DeleteIcon />}
+              onClick={Delete}
+            >
+              Delete
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ margin: 2 }}
+              endIcon={<EditIcon />}
+              onClick={() => {
+                Navigate(`/show/${listing._id}/edit`);
+              }}
+            >
+              Edit
+            </Button>
+          </div>
+        )}
       </div>
-      <div className="Reviews" style={{marginTop:15}} >
-        <div >
+      <div className="Reviews" style={{ marginTop: 15 }}>
+        <div>
           <form className="ReviewInput" onSubmit={postReview}>
             <TextField
               sx={{
                 width: 600,
               }}
-              
               id="outlined-multiline-static"
               label="Reviews"
               required
@@ -151,18 +152,26 @@ export default function ShowCard({ listing }) {
                 defaultValue={2}
                 required
               />
-              {
-
-                nav ? <Button
+              {nav ? (
+                <Button
                   variant="outlined"
                   type="submit"
                   endIcon={<ArrowUpwardIcon />}
                   style={{ width: 100, marginLeft: 120 }}
                 >
                   Submit
-                </Button> : <Typography style={{ marginLeft: 170, textDecorationLine: "underline", color: "red" }}>Must be logged in to post a review  </Typography>
-              }
-
+                </Button>
+              ) : (
+                <Typography
+                  style={{
+                    marginLeft: 170,
+                    textDecorationLine: "underline",
+                    color: "red",
+                  }}
+                >
+                  Must be logged in to post a review{" "}
+                </Typography>
+              )}
             </div>
           </form>
         </div>

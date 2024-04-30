@@ -6,12 +6,13 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 import ExploreIcon from "@mui/icons-material/Explore";
+import { Link } from "react-router-dom";
 
 export default function HomeCard({ listing }) {
   return (
     <>
       <Card sx={{ maxWidth: 345, height: 450, mt: 3 }}>
-        <a style={{ textDecoration: "none" }} href={`/show/${listing._id}`}>
+        <Link style={{ textDecoration: "none" }} to={`/show/${listing._id}`}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
@@ -34,7 +35,7 @@ export default function HomeCard({ listing }) {
               <h4>&#8377;{listing.price.toLocaleString("en-IN")}/Night</h4>
             </Typography>
           </CardContent>
-        </a>
+        </Link>
       </Card>
     </>
   );

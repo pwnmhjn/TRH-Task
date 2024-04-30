@@ -1,16 +1,10 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Stack from "@mui/material/Stack";
 import HomeCard from "../../Components/HomeCard";
+import useListings from "../../Hooks/useListing";
 
 function Home() {
-  const [listings, setListings] = useState([]);
-
-  useEffect(() => {
-    axios.get("/api/listings").then((res) => {
-      setListings(res.data);
-    });
-  }, []);
+  const listings = useListings();
 
   return (
     <>
@@ -23,7 +17,7 @@ function Home() {
         marginRight={2}
         marginLeft={2}
       >
-        {listings.map((listing, index) => (
+        {listings.map((listing) => (
           <div key={listing._id}>
             <HomeCard listing={listing} />
           </div>
@@ -34,4 +28,3 @@ function Home() {
 }
 
 export default Home;
-export { axios };

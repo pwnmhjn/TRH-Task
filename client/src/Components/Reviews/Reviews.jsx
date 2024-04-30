@@ -13,8 +13,6 @@ import useReviewAuth from "../../utils/useReviewAuth";
 export default function Review({ review }) {
   const { id } = useParams();
   const AuthorId = useReviewAuth();
-  // console.log(AuthorId)
-  // console.log(review.author && review.author._id)
 
   const Delete = () => {
     axios

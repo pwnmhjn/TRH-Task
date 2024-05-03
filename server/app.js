@@ -3,10 +3,8 @@ import { mongoose } from "mongoose";
 import listings from "./routes/listings.js";
 import reviews from "./routes/reviews.js";
 import users from "./routes/users.js";
-import Listing from "./models/listings.js";
-import Review from "./models/reviews.js";
-import User from "./models/users.js";
-import JWT from "jsonwebtoken"
+
+import JWT from "jsonwebtoken";
 
 import cookieParser from "cookie-parser";
 
@@ -31,45 +29,37 @@ main()
   });
 // ============================================
 
-
 app.get("/api/listings/token", (req, res) => {
   const { token } = req.cookies;
   try {
-      if (!token) {
-    res.json({ status: false });
-  } else {
-    res.json({ status: true });
-  }
+    if (!token) {
+      res.json({ status: false });
+    } else {
+      res.json({ status: true });
+    }
   } catch (error) {
-    res.send("Bad request")
+    res.send("Bad request");
   }
-
 });
-app.get("/api/listings/owner",  (req, res) => {
+app.get("/api/listings/owner", (req, res) => {
   try {
-     const { token } = req.cookies;
-  const decode = JWT.verify(token,"pwnmhjn")
-  res.send(decode.id)
+    const { token } = req.cookies;
+    const decode = JWT.verify(token, "pwnmhjn");
+    res.send(decode.id);
   } catch (error) {
-    res.send("Access Denid")
+    res.send("Access Denied");
   }
- 
-
 });
 
-app.get("/api/listings/author", async(req, res) => {
+app.get("/api/listings/author", async (req, res) => {
   try {
-     const { token } = req.cookies;
-  const decode = JWT.verify(token,"pwnmhjn")
-  res.send(decode.id)
+    const { token } = req.cookies;
+    const decode = JWT.verify(token, "pwnmhjn");
+    res.send(decode.id);
   } catch (error) {
-    res.send("Access Denid")
+    res.send("Access Denied");
   }
 });
-
-
-
-
 
 app.use("/api/listings", listings);
 app.use("/api/listings", reviews);

@@ -19,9 +19,9 @@ function ListingBtns({ id }) {
         func={delList}
         icon={<DeleteIcon />}
         name="Delete"
-        style="contained"
+        variant="contained"
       />
-      <Btn func={Edit} icon={<EditIcon />} name="Edit" style="outlined" />
+      <Btn func={Edit} icon={<EditIcon />} name="Edit" variant="outlined" />
     </div>
   );
 }

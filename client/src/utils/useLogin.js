@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useLogin = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     axios
@@ -13,10 +13,9 @@ const useLogin = () => {
         } else {
           setIsLogin(false);
         }
-        
       })
       .catch((err) => console.log(err));
-  },[]);
+  }, []);
 
   return isLogin;
 };

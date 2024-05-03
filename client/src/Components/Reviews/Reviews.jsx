@@ -21,7 +21,7 @@ export default function Review({ review }) {
         toast.error("Review Delete");
         setTimeout(() => {
           window.location.reload(false);
-        }, 1500);
+        }, 500);
       })
       .catch((err) => console.log(err));
   };

@@ -1,0 +1,8 @@
+.Index {
+    position: fixed;
+    height: 100vh;
+    background-image: url("https://images.pexels.com/photos/2104152/pexels-photo-2104152.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%
+}

@@ -1,10 +1,10 @@
 import React from "react";
-import Form from "../../Components/Listings/Add/Form";
+import CreateListing from "../../Components/Listings/Create/CreateListing";
 
 function Create() {
   return (
     <>
-      <Form />
+      <CreateListing />
     </>
   );
 }

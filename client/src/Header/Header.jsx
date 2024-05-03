@@ -10,9 +10,14 @@ import { useNavigate, Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import axios from "axios";
 import useLogin from "../utils/useLogin";
+import { ToggleContext } from "../Contexts/ToggleContext";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { LogIn } from "../Pages";
 export default function ButtonAppBar() {
   const Navigate = useNavigate();
+
+  const { isToggle, setIsToggle } = useContext(ToggleContext);
 
   const Logout = () => {
     axios
@@ -25,12 +30,18 @@ export default function ButtonAppBar() {
         console.log(err);
       });
   };
-  // const NewListing = ()=>{
-
-  // useLogin()?Navigate("/create"):Navigate("/login")
-  // }
-
   const nav = useLogin();
+
+  const Switch = () => {
+    // return nav ? Navigate("/create") : setIsToggle(!isToggle);
+    if (nav) {
+      Navigate("/create");
+    } else {
+      toast.error("Login To Create Listing");
+      setIsToggle(true);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -50,9 +61,10 @@ export default function ButtonAppBar() {
             <Button
               sx={{ ml: 4 }}
               color="inherit"
-              onClick={() => {
-                Navigate(nav ? "/create" : "/login");
-              }}
+              onClick={() =>
+                // Navigate(nav ? "/create" : "/login");
+                Switch()
+              }
             >
               New Listing
             </Button>
@@ -63,24 +75,28 @@ export default function ButtonAppBar() {
             </Button>
           ) : (
             <>
-              {" "}
-              <Button
-                className="NewList"
-                color="inherit"
-                onClick={() => {
-                  Navigate("/signup");
-                }}
-              >
-                SignUp
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => {
-                  Navigate("/login");
-                }}
-              >
-                LogIn
-              </Button>
+              {isToggle ? (
+                <Button
+                  className="NewList"
+                  color="inherit"
+                  onClick={() => {
+                    // Navigate("/signup");
+                    setIsToggle(!isToggle);
+                  }}
+                >
+                  SignUp
+                </Button>
+              ) : (
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    // Navigate("/login");
+                    setIsToggle(!isToggle);
+                  }}
+                >
+                  LogIn
+                </Button>
+              )}
             </>
           )}
         </Toolbar>

@@ -1,10 +1,10 @@
 import React from "react";
-import EditForm from "../../Components/Listings/Edit/EditForm";
+import EditListing from "../../Components/Listings/Edit/EditListing";
 
 function Edit() {
   return (
     <div>
-      <EditForm />
+      <EditListing />
     </div>
   );
 }
